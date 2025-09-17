@@ -1,10 +1,12 @@
 # Requirements
 python=3.9.13
+
 Pillow=11.3.0 
+
 numpy=2.0.2
 
 # Run
-*   python main.py
+*     python main.py
 
 # Result
 
