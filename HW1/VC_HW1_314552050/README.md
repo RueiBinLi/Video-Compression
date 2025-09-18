@@ -6,7 +6,7 @@ Pillow=11.3.0
 numpy=2.0.2
 
 # Download Pillow and numpy
-*     pip install -r requirement.txt
+*     pip install -r requirements.txt
 
 # Run
 *     python main.py
