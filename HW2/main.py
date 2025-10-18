@@ -46,7 +46,7 @@ def DCT_2D(gray_img):
 
     cv2.imwrite('2D_DCT_lena.png', T_vis)
 
-    return T_vis
+    return T
 
 def gen_matrix_IDCT_2D(T_img):
     N, M = T_img.shape
@@ -72,7 +72,7 @@ def gen_matrix_IDCT_2D(T_img):
     return img_recon
 
 def IDCT_2D(T_img):
-    img_recon = gen_matrix_2D(T_img)
+    img_recon = gen_matrix_IDCT_2D(T_img)
     img_recon = np.clip(img_recon, 0, 255).astype(np.uint8)
 
     cv2.imwrite('Reconstructed_lena.png', img_recon)
