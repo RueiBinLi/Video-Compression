@@ -1,13 +1,16 @@
+from numba import jit, prange
 import matplotlib.pyplot as plt
 import numpy as np
 import cv2
 import time
+import os
 
 def read_img(img_path):
     img = cv2.imread(img_path)
     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     return gray_img
 
+@jit(nopython=True, parallel=True)
 def gen_matrix_2D(gray_img):
     N, M = gray_img.shape
     matrix = np.zeros((N,N), dtype=float)
@@ -18,7 +21,7 @@ def gen_matrix_2D(gray_img):
     C_v = np.ones(M) * np.sqrt(2 / M)
     C_v[0] = np.sqrt(1 / M)
 
-    print('start 2D-DCT')
+    # print('start 2D-DCT')
 
     for u in range(N):
         for v in range(M):
@@ -32,7 +35,7 @@ def gen_matrix_2D(gray_img):
             
             matrix[u, v] = C_u[u] * C_v[v] * sum_val
     
-    print('Finish 2D-DCT')
+    # print('Finish 2D-DCT')
     return matrix
 
 def DCT_2D(gray_img):
@@ -48,6 +51,7 @@ def DCT_2D(gray_img):
 
     return T
 
+@jit(nopython=True, parallel=True)
 def gen_matrix_IDCT_2D(T_img):
     N, M = T_img.shape
     img_recon = np.zeros((N,N), dtype=float)
